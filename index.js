@@ -13,10 +13,7 @@ mongoose.connect(MONGO_URI, {
 
 // Add middleware function to set CORS headers
 app.use(function (req, res, next) {
-  res.header(
-    'Access-Control-Allow-Origin',
-    'http://localhost:3000' || 'https://foodziya-web-5pti.vercel.app/'
-  ) // Allow any domain to access the resource
+  res.header('Access-Control-Allow-Origin', 'http://localhost:3000') // Allow any domain to access the resource
   res.header(
     'Access-Control-Allow-Headers',
     'Origin, X-Requested-With, Content-Type, Accept'
