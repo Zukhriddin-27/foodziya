@@ -10,6 +10,16 @@ mongoose.connect(MONGO_URI, {
   useUnifiedTopology: true,
 })
 
+// Add middleware function to set CORS headers
+app.use(function (req, res, next) {
+  res.header('Access-Control-Allow-Origin', '*') // Allow any domain to access the resource
+  res.header(
+    'Access-Control-Allow-Headers',
+    'Origin, X-Requested-With, Content-Type, Accept'
+  ) // Allow specific headers in requests
+  next() // Move on to the next middleware function
+})
+
 app.use(express.json())
 
 const categoryRouter = require('./routes/category')
