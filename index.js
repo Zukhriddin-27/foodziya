@@ -2,34 +2,27 @@ const express = require('express')
 const mongoose = require('mongoose')
 const path = require('path')
 const app = express()
-const { MONGO_URI } = require('./config/key')
+const { db } = require('./db')
 const PORT = process.env.PORT || 5000
 const cors = require('cors')
 
-mongoose.connect(MONGO_URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-})
-
-// Add middleware function to set CORS headers
-app.use(function (req, res, next) {
-  res.header('Access-Control-Allow-Origin', 'http://localhost:3000') // Allow any domain to access the resource
-  res.header(
-    'Access-Control-Allow-Headers',
-    'Origin, X-Requested-With, Content-Type, Accept'
-  ) // Allow specific headers in requests
-  next() // Move on to the next middleware function
+// mongoose connect
+db()
+// CORS (Cross-Origin Resource Sharing) headers to support Cross-site HTTP requests
+app.all('*', (req, res, next) => {
+  res.header('Access-Control-Allow-Origin', 'https://localhost:3000')
+  next()
 })
 
 app.use(express.json())
 app.use(cors)
 const categoryRouter = require('./routes/category')
 const postRouter = require('./routes/post')
-// const recipeRouter = require('./routes/recipe')
+const recipeRouter = require('./routes/recipe')
 
 app.use('/api/category', categoryRouter)
 app.use('/api/contact', postRouter)
-// app.use('/api/recipe')
+app.use('/api/recipes', recipeRouter)
 
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static('client/build'))

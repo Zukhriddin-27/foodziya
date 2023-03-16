@@ -13,7 +13,6 @@ router.post('/', async (req, res) => {
     image: req.body.image,
   })
   newCategory.save()
-
   res.status(201).json(newCategory)
 })
 
@@ -54,44 +53,3 @@ router.get('/all', async (req, res) => {
 //   }
 // })
 module.exports = router
-
-// async function insertDymmyCategory() {
-//   try {
-//     await Category.insertMany([
-//       {
-//         name: 'Quyuq taom',
-//         image: 'osh.jpg',
-//       },
-//       {
-//         name: 'Suyuq taom',
-//         image: 'shurva.jpg',
-//       },
-//       {
-//         name: 'Kabob',
-//         image: 'shashlik.png',
-//       },
-//       {
-//         name: 'Salat',
-//         image: 'https://res.cloudinary.com/dus2bqcc6/image/upload/v1659985678/caption_vzxb7c.jpg',
-//       },
-//       {
-//         name: 'Pishiriq',
-//         image: 'https://res.cloudinary.com/dus2bqcc6/image/upload/v1659813167/holvata_ftu9xa.png',
-//       },
-//       {
-//         name: 'Non',
-//         image: 'https://res.cloudinary.com/dus2bqcc6/image/upload/v1659985679/non_hp0wfr.jpg',
-//       },
-//       {
-//         name: 'Shirinlik',
-//         image: 'https://res.cloudinary.com/dus2bqcc6/image/upload/v1659985679/cake_vrvovo.jpg',
-//       },
-//       {
-//         name: 'Ichimlik',
-//         image: 'https://res.cloudinary.com/dus2bqcc6/image/upload/v1659985678/ayron_fxek6m.jpg',
-//       },
-//     ])
-//   } catch (error) {
-//     console.log('err, ' + error)
-//   }
-// }
