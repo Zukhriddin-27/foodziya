@@ -1,6 +1,5 @@
 const { Router } = require('express')
 const router = Router()
-const mongoose = require('mongoose')
 const { Category, validation } = require('../models/Category.js')
 
 router.post('/', async (req, res) => {
