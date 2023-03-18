@@ -2,20 +2,27 @@ const express = require('express')
 const mongoose = require('mongoose')
 const path = require('path')
 const app = express()
-const { db } = require('./db')
 const PORT = process.env.PORT || 5000
 const cors = require('cors')
+const { MONGO_URI } = require('./config/key')
+const { db } = require('./db')
 
-// mongoose connect
 db()
 // CORS (Cross-Origin Resource Sharing) headers to support Cross-site HTTP requests
-app.all('*', (req, res, next) => {
-  res.header('Access-Control-Allow-Origin', 'https://localhost:3000')
+// app.all('*', (req, res, next) => {
+//   res.header('Access-Control-Allow-Origin', '*')
+//   next()
+// })
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*')
   next()
 })
-
 app.use(express.json())
-app.use(cors)
+app.use(
+  cors({
+    origin: 'http://localhost:3000',
+  })
+)
 const categoryRouter = require('./routes/category')
 const postRouter = require('./routes/post')
 const recipeRouter = require('./routes/recipe')
