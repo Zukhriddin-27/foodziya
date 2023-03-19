@@ -41,14 +41,13 @@ const resipesSchema = new mongoose.Schema({
     required: true,
   },
 })
-
-resipesSchema.index({ name: 'text', description: 'text' })
+// resipesSchema.index({ name: 'text', description: 'text' })
 //Wideng card indexing
-// resipesSchema.index({ '$**': 'text' })
+resipesSchema.index({ '$**': 'text' })
 function validateRecipe(detail) {
   const schema = new Joi.object({
     name: Joi.string().required().min(3),
-    description: Joi.string().required().max(500).min(3),
+    description: Joi.string().required().max(4500).min(3),
     email: Joi.string().required().min(3),
     ingredients: Joi.array().required().min(3),
     category: Joi.string().required(),

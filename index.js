@@ -17,10 +17,16 @@ app.use(cors())
 const categoryRouter = require('./routes/category')
 const postRouter = require('./routes/post')
 const recipeRouter = require('./routes/recipe')
+const randomRouter = require('./routes/random')
+const latestRouter = require('./routes/latest')
+const searchRouter = require('./routes/search')
 
 app.use('/api/category', categoryRouter)
 app.use('/api/contact', postRouter)
 app.use('/api/recipes', recipeRouter)
+app.use('/api/random', randomRouter)
+app.use('/api/latest', latestRouter)
+app.use('/api/search', searchRouter)
 
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static('client/build'))

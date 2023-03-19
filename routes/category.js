@@ -1,6 +1,7 @@
 const { Router } = require('express')
 const router = Router()
 const { Category, validation } = require('../models/Category.js')
+const { Recipe } = require('../models/Recipe')
 
 router.post('/', async (req, res) => {
   const { error } = validation(req.body)
@@ -34,21 +35,18 @@ router.get('/all', async (req, res) => {
       console.log(error)
     })
 })
-// router.get('/:id', async (req, res) => {
-//   try {
-//     const categoryId = req.params.id
-
-//     await Recipe.find({ category: categoryId })
-
-//       .then((result) => {
-//         res.json(result)
-//       })
-
-//       .catch((err) => {
-//         console.log(err)
-//       })
-//   } catch (error) {
-//     console.log(error)
-//   }
-// })
+router.get('/:id', async (req, res) => {
+  try {
+    const categoryId = req.params.id
+    await Recipe.find({ category: categoryId })
+      .then((result) => {
+        res.json(result)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  } catch (error) {
+    console.log(error)
+  }
+})
 module.exports = router
